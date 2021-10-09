@@ -43,6 +43,12 @@ class Propshaft::LoadPathTest < ActiveSupport::TestCase
     assert_nil Propshaft::LoadPath.new(Pathname.new("#{__dir__}/../fixtures/assets/nowhere")).find("missing")
   end
 
+  test "raise if asset is not in the pipeline" do
+    assert_raise "Asset 'not-found.css' was not found in the pipeline" do
+      @load_path.find("not-found.css")
+    end
+  end
+
   private
     def find_asset(logical_path)
       asset = Propshaft::Asset.new(

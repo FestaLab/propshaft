@@ -8,7 +8,9 @@ class Propshaft::LoadPath
   end
 
   def find(asset_name)
-    assets_by_path[asset_name]
+    assets_by_path[asset_name].tap do |asset|
+      raise "Asset '#{asset_name}' was not found in the pipeline" if asset.nil?
+    end
   end
 
   def assets(content_types: nil)
