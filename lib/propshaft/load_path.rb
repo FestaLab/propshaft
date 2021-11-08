@@ -44,6 +44,7 @@ class Propshaft::LoadPath
   private
     def assets_by_path
       @cached_assets_by_path ||= Hash.new.tap do |mapped|
+        puts "-" * 90
         paths.each do |path|
           all_files_from_tree(path).each do |file|
             logical_path = file.relative_path_from(path)

@@ -16,7 +16,10 @@ module Propshaft::Resolver
 
     private
       def parsed_manifest
-        @parsed_manifest ||= JSON.parse(manifest_path.read)
+        @parsed_manifest ||= begin
+          puts "=" * 90
+          JSON.parse(manifest_path.read)
+        end
       end
   end
 end
