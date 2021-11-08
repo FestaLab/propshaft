@@ -6,6 +6,7 @@ class Propshaft::Server
   end
 
   def call(env)
+    raise "I should not be here"
     path, digest = extract_path_and_digest(env)
 
     if (asset = @assembly.load_path.find(path)) && asset.fresh?(digest)
