@@ -20,4 +20,14 @@ class Propshaft::AssetTest < ActiveSupport::TestCase
 
     assert assembly.resolver.is_a?(Propshaft::Resolver::Dynamic)
   end
+
+  test "costly objects are memoized" do
+    assembly = Propshaft::Assembly.new(ActiveSupport::OrderedOptions.new.tap { |config|
+      config.output_path = Pathname.new("#{__dir__}/../fixtures/assets")
+      config.prefix = "/assets"
+    })
+
+    assert_equal assembly.resolver.object_id, assembly.resolver.object_id
+    assert_equal assembly.load_path.object_id, assembly.load_path.object_id
+  end
 end
