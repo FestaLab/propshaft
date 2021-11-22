@@ -56,6 +56,11 @@ module Propshaft
           Rails.application.assets.processor.clean
         end
 
+        desc "Remove config.assets.output_path"
+        task clobber: :environment do
+          Rails.application.assets.processor.clean
+        end
+
         desc "Print all the assets available in config.assets.paths"
         task reveal: :environment do
           Rails.application.assets.reveal
